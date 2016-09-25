@@ -5,7 +5,11 @@ class DocsController < ApplicationController
     key :swagger, '2.0'
   end
 
-  jsonapi_resource '/api/users', tags: ['users'], only: [:index, :show]
-  jsonapi_resource '/api/tweets', tags: ['tweets'], only: [:index, :show]
-  jsonapi_resource '/api/messages', tags: ['messages'], only: [:index, :show]
+  jsonapi_resource '/api/tweets', tags: ['tweets']
+  jsonapi_resource '/api/users',
+    tags: ['users'],
+    only: [:index, :show]
+  jsonapi_resource '/api/messages',
+    tags: ['messages'],
+    only: [:index, :show]
 end
