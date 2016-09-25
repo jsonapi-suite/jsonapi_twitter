@@ -9,4 +9,8 @@ class Tweet < ApplicationRecord
   def retweet?
     parent_id.present?
   end
+
+  def retweets
+    self.class.where(parent_id: id)
+  end
 end

@@ -48,6 +48,7 @@ GEM
     byebug (9.0.5)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
+    database_cleaner (1.5.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     ffi (1.9.14)
@@ -67,7 +68,7 @@ GEM
     jsonapi_errorable (0.1.1)
       active_model_serializers (~> 0.10)
       rails (>= 4.1, < 6)
-    jsonapi_spec_helpers (0.2.1)
+    jsonapi_spec_helpers (0.2.2)
     jsonapi_suite (0.1.4)
       active_model_serializers (~> 0.10)
       jsonapi_ams_extensions (~> 0.1)
@@ -190,6 +191,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  database_cleaner
   jsonapi_suite (~> 0.1)
   kaminari (~> 0.17)
   listen (~> 3.0.5)
