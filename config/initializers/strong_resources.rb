@@ -8,7 +8,7 @@ StrongResources.configure do
     attribute :email, :string
   end
 
-  string_resource :message do
+  strong_resource :message do
     attribute :content
   end
 end
