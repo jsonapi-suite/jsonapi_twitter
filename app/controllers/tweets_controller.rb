@@ -15,19 +15,19 @@ class TweetsController < ApplicationController
 
   def index
     tweets = Tweet.all
-    render_ams(tweets)
+    render_jsonapi(tweets)
   end
 
   def show
     tweet = jsonapi_scope(Tweet.all).find(params[:id])
-    render_ams(tweet)
+    render_jsonapi(tweet)
   end
 
   def create
     tweet = Tweet.new(strong_resource)
 
     if tweet.save
-      render_ams(tweet)
+      render_jsonapi(tweet)
     else
       render_errors_for(tweet)
     end
@@ -37,7 +37,7 @@ class TweetsController < ApplicationController
     tweet = jsonapi_scope(Tweet.all).find(params[:id])
 
     if tweet.update_attributes(strong_resource)
-      render_ams(tweet)
+      render_jsonapi(tweet)
     else
       render_errors_for(tweet)
     end
@@ -46,6 +46,6 @@ class TweetsController < ApplicationController
   def destroy
     tweet = jsonapi_scope(Tweet.all).find(params[:id])
     tweet.destroy
-    render_ams(tweet)
+    render_jsonapi(tweet)
   end
 end

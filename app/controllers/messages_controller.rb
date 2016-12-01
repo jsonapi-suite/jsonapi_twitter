@@ -7,11 +7,11 @@ class MessagesController < ApplicationController
 
   def index
     messages = Message.all
-    render_ams(messages)
+    render_jsonapi(messages)
   end
 
   def show
     message = jsonapi_scope(Message.all).find(params[:id])
-    render_ams(message)
+    render_jsonapi(message)
   end
 end

@@ -1,3 +1,16 @@
+PATH
+  remote: ../jsonapi_compliable
+  specs:
+    jsonapi_compliable (0.3.10)
+      jsonapi-rails
+      rails (>= 4.1, < 6)
+
+PATH
+  remote: ../serializable
+  specs:
+    jsonapi-serializable (0.1.1.beta4)
+      jsonapi-renderer (= 0.1.1.beta3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -58,13 +71,15 @@ GEM
     json (1.8.3)
     jsonapi (0.1.1.beta2)
       json (~> 1.8)
+    jsonapi-deserializable (0.1.1.beta3)
+    jsonapi-parser (0.1.1.beta3)
+    jsonapi-rails (0.1.1.beta4)
+      jsonapi-deserializable (= 0.1.1.beta3)
+      jsonapi-parser (= 0.1.1.beta3)
+      jsonapi-serializable (= 0.1.1.beta4)
+    jsonapi-renderer (0.1.1.beta3)
     jsonapi_ams_extensions (0.1.1)
       active_model_serializers (~> 0.10.x)
-    jsonapi_compliable (0.3.5)
-      active_model_serializers (~> 0.10)
-      jsonapi (~> 0.1.1.beta2)
-      jsonapi_ams_extensions (~> 0.1)
-      rails (>= 4.1, < 6)
     jsonapi_errorable (0.1.1)
       active_model_serializers (~> 0.10)
       rails (>= 4.1, < 6)
@@ -190,8 +205,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers
   database_cleaner
+  jsonapi-rails
+  jsonapi-serializable!
+  jsonapi_compliable!
   jsonapi_suite (~> 0.1)
   kaminari (~> 0.17)
   listen (~> 3.0.5)

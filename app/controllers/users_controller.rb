@@ -14,11 +14,11 @@ class UsersController < ApplicationController
 
   def index
     users = User.all
-    render_ams(users)
+    render_jsonapi(users)
   end
 
   def show
     user = jsonapi_scope(User.all).find(params[:id])
-    render_ams(user)
+    render_jsonapi (user)
   end
 end
