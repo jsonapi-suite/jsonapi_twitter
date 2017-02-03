@@ -1,9 +1,5 @@
 class MessagesController < ApplicationController
-  jsonapi do
-    allow_filter :id
-    allow_filter :sender_id
-    allow_filter :receiver_id
-  end
+  jsonapi resource: MessageResource
 
   def index
     messages = Message.all
@@ -11,7 +7,7 @@ class MessagesController < ApplicationController
   end
 
   def show
-    message = jsonapi_scope(Message.all).find(params[:id])
-    render_jsonapi(message)
+    scope = jsonapi_scope(Message.where(id: params[:id]))
+    render_jsonapi(scope.resolve.first, scope: false)
   end
 end

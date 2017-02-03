@@ -1,16 +1,5 @@
 class UsersController < ApplicationController
-  jsonapi do
-    allow_filter :id
-    allow_filter :name
-    allow_filter :email
-    allow_filter :name_prefix do |scope, value|
-      scope.where(["name LIKE ?", "#{value}%"])
-    end
-
-    allow_filter :friend_id do |scope, value|
-      scope.joins(:friendships).where(friendships: { friendee_id: value })
-    end
-  end
+  jsonapi resource: UserResource
 
   def index
     users = User.all
@@ -18,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = jsonapi_scope(User.all).find(params[:id])
-    render_jsonapi (user)
+    scope = jsonapi_scope(User.where(id: params[:id]))
+    render_jsonapi(scope.resolve.first, scope: false)
   end
 end
