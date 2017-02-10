@@ -1,11 +1,5 @@
 class TweetsController < ApplicationController
-  jsonapi do
-    allow_filter :id
-    allow_filter :author_id
-    allow_filter :parent_id
-
-    includes whitelist: { index: :author }
-  end
+  jsonapi resource: TweetResource
 
   before_action :deserialize_jsonapi!, only: [:create, :update]
 
@@ -15,37 +9,37 @@ class TweetsController < ApplicationController
 
   def index
     tweets = Tweet.all
-    render_ams(tweets)
+    render_jsonapi(tweets)
   end
 
   def show
-    tweet = jsonapi_scope(Tweet.all).find(params[:id])
-    render_ams(tweet)
+    scope = jsonapi_scope(Tweet.where(id: params[:id]))
+    render_jsonapi(scope.resolve.first, scope: false)
   end
 
   def create
     tweet = Tweet.new(strong_resource)
 
     if tweet.save
-      render_ams(tweet)
+      render_jsonapi(tweet, scope: false)
     else
       render_errors_for(tweet)
     end
   end
 
   def update
-    tweet = jsonapi_scope(Tweet.all).find(params[:id])
+    tweet = Tweet.find(params[:id])
 
     if tweet.update_attributes(strong_resource)
-      render_ams(tweet)
+      render_jsonapi(tweet, scope: false)
     else
       render_errors_for(tweet)
     end
   end
 
   def destroy
-    tweet = jsonapi_scope(Tweet.all).find(params[:id])
+    tweet = Tweet.find(params[:id])
     tweet.destroy
-    render_ams(tweet)
+    render_jsonapi(tweet, scope: false)
   end
 end
